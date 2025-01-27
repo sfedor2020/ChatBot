@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="À propos de notre interface de chat IA">
+    <title>À propos - Chat IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Composants -->
+    <script src="/js/components/app-nav.js" defer></script>
+    <script src="/js/components/app-footer.js" defer></script>
+    <script src="/js/components/app-layout.js" defer></script>
+</head>
+<body class="h-full">
+    <app-layout>
+        <div class="max-w-3xl mx-auto">
+            <!-- Titre de la page -->
+            <h2 class="text-4xl font-light mb-8 bg-gradient-to-r from-blue-600 to-pink-500 text-transparent bg-clip-text">
+                À propos
+            </h2>
+
+            <!-- Présentation du projet -->
+            <section class="bg-white rounded-xl shadow-sm p-6 mb-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Présentation du Projet</h3>
+                <p class="text-gray-600">
+                    Cette interface de chat IA a été développée dans le cadre d'un projet scolaire 
+                    afin de mettre en pratique des compétences en développement web, notamment l'utilisation 
+                    de JavaScript Vanilla, du HTML sémantique et du CSS accompagné de bibliothèques CSS. 
+                    Je me suis également lancé le défi d'apprendre et d'utiliser les Web Components.
+                </p>
+            </section>
+
+            <!-- Technologies utilisées -->
+            <section class="bg-white rounded-xl shadow-sm p-6">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Technologies Utilisées</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Frontend -->
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h4 class="font-medium text-gray-900 mb-2">Frontend</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-center gap-2">
+                                <span class="text-blue-600">•</span>
+                                HTML Sémantique
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-blue-600">•</span>
+                                Tailwind CSS
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-blue-600">•</span>
+                                JavaScript
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-blue-600">•</span>
+                                Web Components
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Backend -->
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <h4 class="font-medium text-gray-900 mb-2">Backend</h4>
+                        <ul class="space-y-2 text-gray-600">
+                            <li class="flex items-center gap-2">
+                                <span class="text-blue-600">•</span>
+                                Python
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-blue-600">•</span>
+                                Flask
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-blue-600">•</span>
+                                API Ollama
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-blue-600">•</span>
+                                JSON (pour le stockage et la configuration)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </app-layout>
+</body>
+</html>

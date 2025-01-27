@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Interface de chat avec un assistant IA intelligent">
+    <title>Chat IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Composants -->
+    <script src="/js/components/app-nav.js" defer></script>
+    <script src="/js/components/app-footer.js" defer></script>
+    <script src="/js/components/app-layout.js" defer></script>
+    <script src="/js/components/prompt-card.js" defer></script>
+</head>
+<body class="h-full">
+    <app-layout>
+        <div class="h-full flex flex-col">
+            <!-- Message de bienvenue -->
+            <div class="px-4 sm:px-6 lg:px-8 py-6">
+                <h2 class="text-5xl font-light mb-4 bg-gradient-to-r from-blue-600 to-pink-500 text-transparent bg-clip-text">
+                    Bonjour,
+                </h2>
+                <p class="text-4xl text-gray-300 font-light">
+                    Comment puis-je vous aider aujourd'hui ?
+                </p>
+            </div>
+
+            <!-- Section des prompts -->
+            <div class="relative px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-medium text-gray-700">Prompts suggérés</h3>
+                    <button id="toggle-prompts" 
+                            class="p-2 text-gray-500 hover:text-gray-600 rounded-full hover:bg-gray-100"
+                            aria-label="Afficher/Masquer les prompts suggérés">
+                        <svg id="toggle-icon" 
+                             class="w-5 h-5 transform transition-transform duration-300" 
+                             fill="none" 
+                             stroke="currentColor" 
+                             viewBox="0 0 24 24"
+                             aria-hidden="true">
+                            <path stroke-linecap="round" 
+                                  stroke-linejoin="round" 
+                                  stroke-width="2" 
+                                  d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Conteneur des prompts -->
+                <div id="prompts-container" 
+                     class="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                     aria-label="Liste des prompts suggérés">
+                    <!-- Les prompts seront chargés ici dynamiquement -->
+                </div>
+            </div>
+
+            <!-- Messages du chat -->
+            <div id="chat-messages" 
+                 class="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 pb-24"
+                 aria-label="Historique de la conversation actuelle">
+                <!-- Les messages seront insérés ici -->
+            </div>
+
+            <!-- Barre de saisie fixe -->
+            <div class="fixed bottom-0 left-0 right-0 bg-white border-t z-40">
+                <div class="max-w-3xl mx-auto px-4 py-4">
+                    <div class="flex items-center gap-3">
+                        <textarea 
+                            class="flex-1 border-0 focus:ring-0 resize-none p-2"
+                            placeholder="Posez votre question..."
+                            rows="1"
+                            style="min-height: 24px;"
+                            aria-label="Zone de saisie du message"></textarea>
+                        <div class="flex items-center gap-2">
+                            <!-- Bouton pièce jointe -->
+                            <button class="p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100"
+                                    aria-label="Joindre un fichier">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" 
+                                          stroke-linejoin="round" 
+                                          stroke-width="2" 
+                                          d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/>
+                                </svg>
+                            </button>
+                            <!-- Bouton microphone -->
+                            <button class="p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100"
+                                    aria-label="Utiliser le microphone">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" 
+                                          stroke-linejoin="round" 
+                                          stroke-width="2" 
+                                          d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                                </svg>
+                            </button>
+                            <!-- Bouton envoyer -->
+                            <button class="p-2 bg-blue-600 text-white rounded-full hover:bg-blue-700"
+                                    aria-label="Envoyer le message">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" 
+                                          stroke-linejoin="round" 
+                                          stroke-width="2" 
+                                          d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-layout>
+
+    <!-- Initialisation des gestionnaires -->
+    <script src="/js/prompts-manager.js" defer></script>
+    <script src="/js/chat.js" defer></script>
+</body>
+</html>

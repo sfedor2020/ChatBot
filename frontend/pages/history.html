@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique - Chat IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Composants -->
+    <script src="/js/components/app-nav.js" defer></script>
+    <script src="/js/components/app-footer.js" defer></script>
+    <script src="/js/components/app-layout.js" defer></script>
+</head>
+<body class="h-full">
+    <app-layout>
+        <!-- En-tête avec bouton d'effacement -->
+        <div class="flex justify-between items-center mb-8">
+            <h2 class="text-4xl font-light bg-gradient-to-r from-blue-600 to-pink-500 text-transparent bg-clip-text">
+                Historique des Conversations
+            </h2>
+            <button id="clear-history" 
+                    class="text-red-600 hover:text-red-700 text-sm font-medium transition-colors duration-200">
+                Effacer l'historique
+            </button>
+        </div>
+
+        <!-- Conteneur de l'historique -->
+        <div id="history-container" class="space-y-8">
+            <!-- Les conversations seront injectées ici dynamiquement via JavaScript -->
+        </div>
+    </app-layout>
+
+    <script src="/js/conversation-manager.js" defer></script>
+</body>
+</html>

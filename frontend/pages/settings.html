@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Configurez les paramètres de votre Chat IA">
+    <title>Paramètres - Chat IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Composants -->
+    <script src="/js/components/app-nav.js" defer></script>
+    <script src="/js/components/app-footer.js" defer></script>
+    <script src="/js/components/app-layout.js" defer></script>
+</head>
+<body class="h-full">
+    <app-layout>
+        <h2 class="text-4xl font-light mb-8 bg-gradient-to-r from-blue-600 to-pink-500 text-transparent bg-clip-text">
+            Paramètres
+        </h2>
+
+        <div class="max-w-2xl mx-auto">
+            <form id="settings-form" class="space-y-6">
+                <!-- Paramètres du modèle IA -->
+                <section class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Modèle IA</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="model-select" class="block text-sm font-medium text-gray-700">Modèle</label>
+                            <select id="model-select" 
+                                    name="model"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    aria-describedby="model-description">
+                                <option value="mistral">Mistral</option>
+                                <option value="llama3">Llama 3</option>
+                            </select>
+                            <p id="model-description" class="mt-1 text-sm text-gray-500">
+                                Sélectionnez le modèle d'IA à utiliser pour les réponses
+                            </p>
+                        </div>
+
+                        <div>
+                            <label for="temperature" class="block text-sm font-medium text-gray-700">
+                                Température: <span id="temp-value" class="text-blue-600">0.7</span>
+                            </label>
+                            <input type="range" 
+                                   id="temperature" 
+                                   name="temperature"
+                                   min="0" max="1" step="0.1" value="0.7"
+                                   class="mt-1 w-full"
+                                   aria-describedby="temperature-description">
+                            <p id="temperature-description" class="mt-1 text-sm text-gray-500">
+                                Ajustez la créativité des réponses (0 = plus conservateur, 1 = plus créatif)
+                            </p>
+                        </div>
+
+                        <div>
+                            <label for="max-length" class="block text-sm font-medium text-gray-700">
+                                Longueur maximale
+                            </label>
+                            <input type="number" 
+                                   id="max-length" 
+                                   name="maxLength"
+                                   value="500" 
+                                   min="100"
+                                   max="2000"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                   aria-describedby="length-description">
+                            <p id="length-description" class="mt-1 text-sm text-gray-500">
+                                Nombre maximum de tokens dans la réponse (entre 100 et 2000)
+                            </p>
+                        </div>
+
+                        <div>
+                            <label for="system-prompt" class="block text-sm font-medium text-gray-700">
+                                Prompt système
+                            </label>
+                            <textarea id="system-prompt" 
+                                    name="systemPrompt"
+                                    rows="3"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    aria-describedby="prompt-description"></textarea>
+                            <p id="prompt-description" class="mt-1 text-sm text-gray-500">
+                                Instructions de base données au modèle pour guider son comportement
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Préférences d'affichage -->
+                <section class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Préférences d'affichage</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="theme" class="block text-sm font-medium text-gray-700">Thème</label>
+                            <select id="theme" 
+                                    name="theme"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    aria-describedby="theme-description">
+                                <option value="light">Clair</option>
+                                <option value="dark">Sombre</option>
+                                <option value="system">Système</option>
+                            </select>
+                            <p id="theme-description" class="mt-1 text-sm text-gray-500">
+                                Choisissez l'apparence de l'interface
+                            </p>
+                        </div>
+
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" 
+                                   id="save-history" 
+                                   name="saveHistory"
+                                   class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                                   aria-describedby="history-description">
+                            <label for="save-history" class="text-sm text-gray-700">
+                                Sauvegarder l'historique des conversations
+                            </label>
+                        </div>
+                        <p id="history-description" class="text-sm text-gray-500">
+                            Les conversations seront conservées localement sur votre appareil
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Actions du formulaire -->
+                <div class="flex justify-end gap-4">
+                    <button type="button" 
+                            id="reset-btn"
+                            class="px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                            aria-label="Réinitialiser tous les paramètres">
+                        Réinitialiser
+                    </button>
+                    <button type="submit"
+                            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                            aria-label="Sauvegarder les modifications">
+                        Sauvegarder
+                    </button>
+                </div>
+            </form>
+        </div>
+    </app-layout>
+
+    <!-- Gestionnaire des paramètres -->
+    <script src="/js/settings.js" defer></script>
+</body>
+</html>

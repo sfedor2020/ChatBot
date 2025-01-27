@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gérez vos prompts personnalisés pour le Chat IA">
+    <title>Prompts - Chat IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Composants -->
+    <script src="/js/components/app-nav.js" defer></script>
+    <script src="/js/components/app-footer.js" defer></script>
+    <script src="/js/components/app-layout.js" defer></script>
+    <script src="/js/components/prompt-card.js" defer></script>
+</head>
+<body class="h-full">
+    <app-layout>
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-4xl font-light mb-8 bg-gradient-to-r from-blue-600 to-pink-500 text-transparent bg-clip-text">
+                Mes Prompts
+            </h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Section du formulaire -->
+                <div class="lg:col-span-1">
+                    <form id="new-prompt-form" class="bg-white rounded-xl shadow-sm p-6 sticky top-4">
+                        <!-- Champ caché pour l'ID du prompt lors de l'édition -->
+                        <input type="hidden" id="prompt-id" name="prompt-id" value="">
+                        
+                        <div class="space-y-6">
+                            <!-- Champ titre -->
+                            <div>
+                                <label for="prompt-title" class="block text-sm font-medium text-gray-700">Titre</label>
+                                <input type="text" 
+                                       id="prompt-title" 
+                                       name="prompt-title" 
+                                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                       placeholder="Donnez un titre à votre prompt"
+                                       required
+                                       aria-required="true">
+                            </div>
+
+                            <!-- Sélection de catégorie -->
+                            <div>
+                                <label for="prompt-category" class="block text-sm font-medium text-gray-700">Catégorie</label>
+                                <select id="prompt-category" 
+                                        name="prompt-category"
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        required
+                                        aria-required="true">
+                                    <option value="">Sélectionnez une catégorie</option>
+                                    <option value="general">Général</option>
+                                    <option value="code">Code</option>
+                                    <option value="analysis">Analyse</option>
+                                    <option value="creative">Créatif</option>
+                                </select>
+                            </div>
+
+                            <!-- Texte du prompt -->
+                            <div>
+                                <label for="prompt-text" class="block text-sm font-medium text-gray-700">Texte du Prompt</label>
+                                <textarea id="prompt-text" 
+                                          name="prompt-text" 
+                                          rows="4"
+                                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                          placeholder="Écrivez votre prompt ici..."
+                                          required
+                                          aria-required="true"></textarea>
+                            </div>
+
+                            <!-- Boutons du formulaire -->
+                            <div class="flex gap-4">
+                                <button type="submit" 
+                                        class="flex-1 bg-blue-600 text-white rounded-md py-2 px-4 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200">
+                                    Sauvegarder
+                                </button>
+                                <button type="button" 
+                                        id="cancel-edit"
+                                        class="hidden flex-1 bg-gray-100 text-gray-700 rounded-md py-2 px-4 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors duration-200">
+                                    Annuler
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Section liste des prompts -->
+                <div class="lg:col-span-2">
+                    <!-- En-tête de section -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-medium text-gray-900">Prompts créés</h3>
+                        <p class="text-sm text-gray-500">
+                            Gérez vos prompts personnalisés. Vous pouvez les modifier, les supprimer ou les ajouter aux favoris.
+                        </p>
+                        <div class="mt-2 text-xs text-gray-500">
+                            <span class="inline-block">
+                                <span class="font-medium">Limite de favoris :</span> 
+                                3 sur mobile, 6 sur desktop
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Grille des prompts -->
+                    <div id="prompts-list" 
+                         class="grid gap-4 grid-cols-1 md:grid-cols-2"
+                         aria-label="Liste des prompts personnalisés">
+                        <!-- Les prompts seront chargés ici dynamiquement -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-layout>
+
+    <!-- Gestionnaire des prompts -->
+    <script src="/js/prompts-handler.js" defer></script>
+</body>
+</html>

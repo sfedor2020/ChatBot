@@ -1,0 +1,36 @@
+/* Utilitaires de mise en page globale */
+.page-container {
+    @apply min-h-screen flex flex-col;
+}
+
+.main-content {
+    @apply flex-1 w-full;
+}
+
+.content-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
+}
+
+/* Motifs communs pour les cartes */
+.card {
+    @apply bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow;
+}
+
+/* Styles communs pour les boutons */
+.btn-primary {
+    @apply px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700;
+}
+
+.btn-secondary {
+    @apply px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50;
+}
+
+/* Styles communs pour les boutons avec icônes */
+.icon-btn {
+    @apply p-2 text-gray-400 hover:text-gray-600 rounded-full hover:bg-gray-100;
+}
+
+/* Styles communs pour les champs de formulaire */
+.form-input {
+    @apply rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500;
+}

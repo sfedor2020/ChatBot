@@ -1,0 +1,7 @@
+{
+    "model": "mistral",
+    "ollama_url": "http://localhost:11434",
+    "temperature": 0.7,
+    "max_length": 500,
+    "system_prompt": "You are a helpful AI assistant."
+}

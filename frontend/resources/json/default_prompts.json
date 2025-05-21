@@ -1,27 +1,26 @@
 [
     {
-        "title": "PHP Developer Humor",
+        "title": "Humour de développeur PHP",
         "category": "fun",
-        "text": "Craft a sharp, witty joke about a PHP developer and their Sisyphus-like workday. Feel free to lean into the harsh truths of debugging legacy code, chasing down elusive bugs, or the existential dread of fixing something only for it to break again. Don't hold back—dark humor and irony are welcome (it’s all in good fun)!",
+        "text": "Crée une blague incisive et spirituelle sur un développeur PHP et sa journée de travail digne de Sisyphe. N'hésite pas à aborder les dures vérités du débogage de code legacy, de la traque de bugs insaisissables, ou de l'angoisse existentielle de réparer quelque chose qui finit par se casser à nouveau. Ne te retiens pas—l'humour noir et l'ironie sont bienvenus (c'est pour rire, après tout) !",
         "id": "php_humor"
     },
     {
-        "title": "Learn English",
+        "title": "Apprendre l'anglais",
         "category": "education",
-        "text": "I’m a beginner trying to learn English. When I make mistakes in my input, start by pointing out the errors with a brief explanation and offer the corrected version. Then, guide me step by step to improve. If you understand these instructions, reply only with “Understood” in your first response and nothing else.",
+        "text": "Je suis francophone et j'essaie d'apprendre l'anglais. Quand je fais des erreurs dans mes phrases en anglais, commence par souligner ces erreurs avec une brève explication en français et propose la version corrigée. Ensuite, guide-moi étape par étape pour m'améliorer. Si tu comprends ces instructions, réponds uniquement par « Understood » dans ta première réponse, sans rien ajouter d'autre.",
         "id": "learn_english"
     },
     {
-        "title": "Debug and Explain Code",
+        "title": "Déboguer et expliquer le code",
         "category": "code",
-        "text": "Wait for me to provide a code snippet in my next input. Once I share the code, identify any issues, explain the problems clearly in simple terms, and provide a corrected version. Add detailed comments to the corrected code to highlight and clarify your changes. Ensure the explanation and solution are beginner-friendly.",
+        "text": "Attends que je te fournisse un extrait de code dans mon prochain message. Une fois que j'aurai partagé le code, identifie les problèmes éventuels, explique-les clairement en termes simples, et fournis une version corrigée. Ajoute des commentaires détaillés au code corrigé pour mettre en évidence et clarifier tes modifications. Assure-toi que l'explication et la solution soient accessibles aux débutants.",
         "id": "debug_explain"
     },    
     {
-        "title": "Simplify a Complex Topic",
+        "title": "Simplifier un sujet complexe",
         "category": "education",
-        "text": "Wait for me to specify a topic in my next input. Once I provide the topic, explain it in simple, beginner-friendly terms. Use relatable analogies or real-life examples to make it easier to grasp. Break the explanation into small, clear, and manageable steps. Do not provide any explanation or example unless I have explicitly given a topic.",
-        "id": "simplify_topic"
+        "text": "Attends que je spécifie un sujet dans mon prochain message. Une fois que j'aurai fourni le sujet, explique-le en termes simples et accessibles aux débutants. Utilise des analogies pertinentes ou des exemples concrets pour faciliter la compréhension. Décompose l'explication en étapes claires, simples et gérables. Ne fournis aucune explication ou exemple tant que je n'ai pas explicitement donné un sujet.",
+        "id": "simplifier_sujet"
     }
-    
 ]

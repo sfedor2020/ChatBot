@@ -1,26 +1,26 @@
 [
     {
         "title": "Humour de développeur PHP",
-        "category": "fun",
-        "text": "Crée une blague incisive et spirituelle sur un développeur PHP et sa journée de travail digne de Sisyphe. N'hésite pas à aborder les dures vérités du débogage de code legacy, de la traque de bugs insaisissables, ou de l'angoisse existentielle de réparer quelque chose qui finit par se casser à nouveau. Ne te retiens pas—l'humour noir et l'ironie sont bienvenus (c'est pour rire, après tout) !",
+        "category": "humour",
+        "text": "Raconte-moi une blague bien sentie et pleine d'esprit sur un développeur PHP et sa journée de travail digne de Sisyphe. N'hésite pas à insister sur les dures réalités du débogage de code hérité, la chasse aux bugs insaisissables, ou l'angoisse existentielle de réparer quelque chose pour que ça casse à nouveau. Lâche-toi — l'humour noir et l'ironie sont les bienvenus (c'est pour rire !) !",
         "id": "php_humor"
     },
     {
         "title": "Apprendre l'anglais",
-        "category": "education",
-        "text": "Je suis francophone et j'essaie d'apprendre l'anglais. Quand je fais des erreurs dans mes phrases en anglais, commence par souligner ces erreurs avec une brève explication en français et propose la version corrigée. Ensuite, guide-moi étape par étape pour m'améliorer. Si tu comprends ces instructions, réponds uniquement par « Understood » dans ta première réponse, sans rien ajouter d'autre.",
+        "category": "éducation",
+        "text": "Je suis débutant(e) et j'essaie d'apprendre l'anglais. Quand je fais des erreurs dans ce que j'écris, commence par souligner mes erreurs avec une brève explication et propose la version corrigée. Ensuite, guide-moi pas à pas pour m'améliorer. Si tu as compris ces instructions, réponds uniquement \"Compris\" dans ta première réponse et rien d'autre.",
         "id": "learn_english"
     },
     {
-        "title": "Déboguer et expliquer le code",
+        "title": "Déboguer et expliquer du code",
         "category": "code",
-        "text": "Attends que je te fournisse un extrait de code dans mon prochain message. Une fois que j'aurai partagé le code, identifie les problèmes éventuels, explique-les clairement en termes simples, et fournis une version corrigée. Ajoute des commentaires détaillés au code corrigé pour mettre en évidence et clarifier tes modifications. Assure-toi que l'explication et la solution soient accessibles aux débutants.",
+        "text": "Attends que je te fournisse un extrait de code dans ma prochaine entrée. Une fois que j'aurai partagé le code, identifie les problèmes éventuels, explique clairement les soucis en termes simples, et fournis une version corrigée. Ajoute des commentaires détaillés au code corrigé pour souligner et clarifier tes modifications. Assure-toi que l'explication et la solution soient adaptées aux débutants.",
         "id": "debug_explain"
-    },    
+    },
     {
         "title": "Simplifier un sujet complexe",
-        "category": "education",
-        "text": "Attends que je spécifie un sujet dans mon prochain message. Une fois que j'aurai fourni le sujet, explique-le en termes simples et accessibles aux débutants. Utilise des analogies pertinentes ou des exemples concrets pour faciliter la compréhension. Décompose l'explication en étapes claires, simples et gérables. Ne fournis aucune explication ou exemple tant que je n'ai pas explicitement donné un sujet.",
-        "id": "simplifier_sujet"
+        "category": "éducation",
+        "text": "Attends que je précise un sujet dans ma prochaine entrée. Une fois que j'aurai fourni le sujet, explique-le en termes simples et accessibles aux débutants. Utilise des analogies parlantes ou des exemples concrets pour faciliter la compréhension. Décompose l'explication en étapes courtes, claires et faciles à suivre. Ne fournis aucune explication ou exemple tant que je n'ai pas explicitement donné de sujet.",
+        "id": "simplify_topic"
     }
 ]

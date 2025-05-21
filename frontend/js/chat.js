@@ -342,7 +342,13 @@ class ChatUI {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    prompt: `Créez un titre concis (3-5 mots) qui résume le sujet principal de cette conversation, basé sur ces messages: "${userMessages.join(' | ')}"`,
+                    prompt: `Crée UN SEUL titre concis (2-7 mots) qui résume cette conversation.
+                    IMPORTANT:
+                    - N'utilise PAS de caractères spéciaux comme les astérisques (**) ou autres symboles
+                    - Produis un titre complet, jamais de fragment comme "(ou..."
+                    - Si la conversation porte sur une technologie spécifique, tu peux utiliser cette technologie comme préfixe
+                    
+                    Basé sur ces messages: "${userMessages.join(' | ')}"`,
                     isTitle: true
                 })
             });
@@ -353,7 +359,33 @@ class ChatUI {
 
             const data = await response.json();
             if (!data.error) {
-                this.currentConversation.title = data.response || "Nouvelle conversation";
+                // Nettoyer seulement les caractères spéciaux problématiques
+                let title = data.response || "Nouvelle conversation";
+                
+                // Supprimer les caractères spéciaux, mais pas les deux-points ou les tirets
+                title = title.replace(/[*"'\[\](){}]/g, '');
+                
+                // Supprimer les fragments comme "(ou" en fin de titre
+                title = title.replace(/\s*\([^)]*$/, '');
+                
+                // Supprimer les astérisques et symboles spéciaux
+                title = title.replace(/\*+/g, '');
+                
+                // Nettoyer les espaces multiples et espaces en début/fin
+                title = title.replace(/\s+/g, ' ').trim();
+                
+                // Si le titre est vide après nettoyage, utiliser un titre par défaut
+                if (!title || title.length < 3) {
+                    title = "Nouvelle conversation";
+                }
+                
+                // Limiter à 7 mots maximum
+                const words = title.split(/\s+/);
+                if (words.length > 7) {
+                    title = words.slice(0, 7).join(' ');
+                }
+                
+                this.currentConversation.title = title;
                 this.saveToLocalStorage();
             } else {
                 console.error('Erreur lors de la génération du titre:', data.error);

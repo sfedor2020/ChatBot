@@ -261,7 +261,11 @@ def chat():
         )
 
         if response.ok:
-            return response.json()
+            result = response.json()
+            # Add model information to the response
+            model_name = config['model'].split(':')[0].capitalize() if ':' in config['model'] else config['model'].capitalize()
+            result['model'] = model_name
+            return result
         else:
             print(f"Erreur Ollama: {response.text}")
             return {

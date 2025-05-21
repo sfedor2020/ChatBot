@@ -7,11 +7,11 @@ class AppNav extends HTMLElement {
     render() {
         const currentPath = window.location.pathname;
         const routes = [
-            { path: '/', text: 'Chat' },
-            { path: '/prompts', text: 'Prompts' },
-            { path: '/history', text: 'Historique' },
-            { path: '/settings', text: 'Paramètres' },
-            { path: '/about', text: 'À propos' }
+            { path: '/', text: 'Chat', class: 'nav-item-1' },
+            { path: '/prompts', text: 'Prompts', class: 'nav-item-2' },
+            { path: '/history', text: 'Historique', class: 'nav-item-3' },
+            { path: '/settings', text: 'Paramètres', class: 'nav-item-4' },
+            { path: '/about', text: 'À propos', class: 'nav-item-5' }
         ];
 
         this.innerHTML = `
@@ -28,7 +28,7 @@ class AppNav extends HTMLElement {
                                           d="M4 6h16M4 12h16M4 18h16"/>
                                 </svg>
                             </button>
-                            <span class="text-xl font-medium ml-2 lg:ml-0">Chat IA</span>
+                            <span class="text-xl font-medium ml-2 lg:ml-0 nav-brand">Chat IA</span>
                         </div>
 
                         <!-- Navigation bureau -->
@@ -37,8 +37,8 @@ class AppNav extends HTMLElement {
                                 <a href="${route.path}" 
                                    class="px-3 py-2 text-sm font-medium rounded-md ${
                                        currentPath === route.path
-                                       ? 'bg-gray-100 text-gray-900'
-                                       : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+                                       ? 'nav-item-active'
+                                       : route.class + ' hover:text-gray-900 hover:bg-gray-50'
                                    }"
                                    aria-current="${currentPath === route.path ? 'page' : 'false'}">
                                     ${route.text}
@@ -55,8 +55,8 @@ class AppNav extends HTMLElement {
                             <a href="${route.path}" 
                                class="block px-3 py-2 rounded-md text-base font-medium ${
                                    currentPath === route.path
-                                   ? 'bg-gray-100 text-gray-900'
-                                   : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
+                                   ? 'nav-item-active'
+                                   : route.class + ' hover:text-gray-900 hover:bg-gray-50'
                                }"
                                aria-current="${currentPath === route.path ? 'page' : 'false'}">
                                 ${route.text}

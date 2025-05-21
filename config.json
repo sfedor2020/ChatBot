@@ -1,7 +1,7 @@
 {
-    "model": "mistral",
+    "model": "gemma3:4b-it-q8_0",
     "ollama_url": "http://localhost:11434",
     "temperature": 0.7,
     "max_length": 500,
-    "system_prompt": "You are a helpful AI assistant."
+    "system_prompt": "Vous \u00eates un assistant IA serviable."
 }

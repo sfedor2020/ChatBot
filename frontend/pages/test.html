@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Gradient Styling</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Basic gradient approaches */
+        .gradient-text-1 {
+            background: linear-gradient(90deg, #3B82F6, #EC4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        .gradient-text-2 {
+            background-image: linear-gradient(to right, #3B82F6, #EC4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        /* Gradient button styles */
+        .gradient-btn-1 {
+            background: linear-gradient(90deg, #3B82F6, #EC4899);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-btn-1:hover {
+            opacity: 0.9;
+        }
+        
+        /* Test for welcome text */
+        .welcome-text {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subheading-text {
+            font-size: 2rem;
+            font-weight: 300;
+        }
+        
+        /* Section styling */
+        .test-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    <h1 class="text-3xl font-bold mb-8">Test des styles à gradient</h1>
+    
+    <div class="test-section">
+        <h2 class="text-xl font-semibold mb-4">1. Test du texte d'accueil</h2>
+        
+        <div class="welcome-text gradient-text-1">Bonjour,</div>
+        <div class="subheading-text gradient-text-1">Comment puis-je vous aider aujourd'hui ?</div>
+    </div>
+    
+    <div class="test-section">
+        <h2 class="text-xl font-semibold mb-4">2. Test des boutons</h2>
+        
+        <button class="gradient-btn-1 mb-4">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            </svg>
+            <span>Nouvelle conversation</span>
+        </button>
+    </div>
+    
+    <div class="test-section">
+        <h2 class="text-xl font-semibold mb-4">3. Test alternative avec Tailwind</h2>
+        
+        <div class="inline-block bg-gradient-to-r from-blue-600 to-pink-500 text-transparent bg-clip-text text-4xl font-light mb-2">
+            Bonjour,
+        </div>
+        <br>
+        <div class="inline-block bg-gradient-to-r from-blue-600 to-pink-500 text-transparent bg-clip-text text-2xl font-light">
+            Comment puis-je vous aider aujourd'hui ?
+        </div>
+    </div>
+</body>
+</html>

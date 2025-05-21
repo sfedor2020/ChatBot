@@ -79,16 +79,21 @@ class ChatUI {
     }
 
     addNewChatButton() {
+        // Retirer la position fixe existante et ajouter près de la zone de saisie
         const buttonContainer = document.createElement('div');
-        buttonContainer.className = 'fixed top-20 right-4 z-40';
+        buttonContainer.className = 'new-chat-btn-container';
         buttonContainer.innerHTML = `
-            <button class="bg-blue-600 text-white rounded-full p-3 shadow-lg hover:bg-blue-700 transition-colors duration-200">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button class="new-chat-btn" title="Nouvelle conversation">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                 </svg>
+                <span class="new-chat-label">Nouvelle conversation</span>
             </button>
         `;
-        document.body.appendChild(buttonContainer);
+        
+        // Insérer le bouton avant le conteneur de messages
+        const messageContainer = document.getElementById('chat-messages');
+        messageContainer.parentNode.insertBefore(buttonContainer, messageContainer);
 
         buttonContainer.querySelector('button').addEventListener('click', () => this.startNewConversation());
     }
@@ -161,20 +166,136 @@ class ChatUI {
         }
     }
 
+    cleanupExplanatorySections(text) {
+        // Reconnaissance de motifs plus robuste pour les sections explicatives
+        const patterns = [
+            /\*\*Why it works[\s\S]*$/i,
+            /\*\*Why this [\s\S]*$/i,
+            /\*\*Sense of[\s\S]*$/i,
+            /\*\*Dark[\s\S]*$/i,
+            /\*\*Existential[\s\S]*$/i,
+            /\*\*Specific[\s\S]*$/i,
+            /\*\*Sisyphus[\s\S]*$/i,
+            /\*\*PHP Specifics[\s\S]*$/i,
+            /\*\*Irony[\s\S]*$/i,
+            /Would you like me to[\s\S]*$/i,
+            /Do you want me to[\s\S]*$/i,
+            /BUT THOSE AER[\s\S]*$/i,
+            /BUT THOSE ARE[\s\S]*$/i
+        ];
+
+        let cleanedText = text;
+        for (const pattern of patterns) {
+            cleanedText = cleanedText.replace(pattern, '');
+        }
+        
+        // Supprimer les "---" à la fin des messages
+        cleanedText = cleanedText.replace(/\s*---\s*$/, '');
+        
+        return cleanedText.trim();
+    }
+
+    formatModelName(model) {
+        if (!model) return 'IA';
+        
+        // Extraire le nom du modèle et ajouter l'indication de taille
+        if (model.toLowerCase().includes('gemma')) {
+            return 'Gemma3: 4B';
+        } else if (model.toLowerCase().includes('mistral')) {
+            return 'Mistral: 7B';
+        } else if (model.toLowerCase().includes('llama')) {
+            return 'Llama3: 8B';
+        }
+        
+        return model;
+    }
+
+    getFormattedTime() {
+        const now = new Date();
+        return now.toLocaleTimeString('fr-FR', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+    }
+
+    renderWithoutMarkdown(text) {
+        // Gérer manuellement les cas spéciaux de markdown pour éviter le double formatage
+        // Remplacer *texte* par <em>texte</em> mais laisser ** pour le gras tel quel
+        let displayText = text;
+        
+        // Remplacer les astérisques isolés par un cas spécial (pas à l'intérieur des mots)
+        displayText = displayText.replace(/(\s|^)\*([^\*]+)\*(\s|$|\.|\,|\;|\:|\!|\?)/g, '$1<em>$2</em>$3');
+        
+        return displayText;
+    }
+
     addMessage(text, isUser = false, saveToConversation = true) {
         const messageDiv = document.createElement('div');
-        messageDiv.className = `flex ${isUser ? 'justify-end' : 'justify-start'} mb-4`;
+        messageDiv.className = `flex ${isUser ? 'justify-end' : 'justify-start'} mb-6`;
+        
+        // Si ce n'est pas un message utilisateur, nettoyer les sections explicatives
+        let displayText = text;
+        let modelName = '';
+        let messageTime = this.getFormattedTime();
+        
+        if (!isUser) {
+            // Récupérer le nom du modèle depuis la conversation
+            modelName = this.formatModelName(this.currentConversation.model);
+            displayText = this.cleanupExplanatorySections(displayText);
+            
+            // Ne pas ajouter de "---" à la fin
+        }
+        
+        // Traiter le texte pour l'affichage
+        let processedText = isUser 
+            ? displayText 
+            : (typeof marked !== 'undefined' ? this.renderWithoutMarkdown(displayText) : displayText);
         
         messageDiv.innerHTML = `
             <div class="${isUser ? 
                 'bg-blue-600 text-white' : 
-                'bg-gray-200 text-gray-800'} 
-                rounded-lg px-4 py-2 max-w-[70%] break-words shadow-sm">
-                ${text}
+                'bg-gray-100 text-gray-800'} 
+                rounded-2xl px-5 py-3 max-w-[75%] break-words shadow-sm ${isUser ? 'rounded-tr-sm' : 'rounded-tl-sm'}">
+                <div class="text-sm ${isUser ? 'text-blue-200' : 'text-gray-500'} mb-1">
+                    ${isUser ? 'Vous' : modelName}
+                </div>
+                <div class="prose prose-sm">
+                    ${processedText}
+                </div>
+                ${!isUser ? `
+                <div class="flex items-center justify-between text-xs text-gray-400 mt-3 pt-2 border-t border-gray-200">
+                    <span>${messageTime}</span>
+                    <button class="copy-message p-1 hover:text-gray-600" title="Copier le message">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                    </button>
+                </div>
+                ` : ''}
             </div>
         `;
         
         this.chatContainer.appendChild(messageDiv);
+
+        // Ajouter la fonctionnalité de copie pour les messages IA
+        if (!isUser) {
+            const copyButton = messageDiv.querySelector('.copy-message');
+            if (copyButton) {
+                copyButton.addEventListener('click', () => {
+                    navigator.clipboard.writeText(displayText)
+                        .then(() => {
+                            // Afficher une infobulle temporaire
+                            const tooltip = document.createElement('div');
+                            tooltip.className = 'copy-tooltip';
+                            tooltip.textContent = 'Copié!';
+                            copyButton.appendChild(tooltip);
+                            setTimeout(() => tooltip.remove(), 1500);
+                        })
+                        .catch(err => console.error('Erreur lors de la copie:', err));
+                });
+            }
+        }
 
         // Gestion du premier message sur mobile
         if (isUser && this.isFirstMessage && window.innerWidth <= 768) {
@@ -244,14 +365,19 @@ class ChatUI {
 
     addLoadingIndicator() {
         const loadingDiv = document.createElement('div');
-        loadingDiv.className = 'flex justify-start mb-4';
+        loadingDiv.className = 'flex justify-start mb-6';
+        
+        const modelName = this.formatModelName(this.currentConversation.model);
         
         loadingDiv.innerHTML = `
-            <div class="bg-gray-200 text-gray-800 rounded-lg px-4 py-2 shadow-sm">
-                <div class="flex items-center space-x-2">
-                    <div class="w-2 h-2 bg-gray-600 rounded-full animate-bounce" style="animation-delay: 0s"></div>
-                    <div class="w-2 h-2 bg-gray-600 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
-                    <div class="w-2 h-2 bg-gray-600 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+            <div class="bg-gray-100 text-gray-800 rounded-2xl px-5 py-3 shadow-sm rounded-tl-sm">
+                <div class="flex items-center">
+                    <div class="text-sm text-gray-500 model-name-loading">${modelName}</div>
+                    <div class="loading-animation ml-3">
+                        <div class="loading-bar"></div>
+                        <div class="loading-bar"></div>
+                        <div class="loading-bar"></div>
+                    </div>
                 </div>
             </div>
         `;
@@ -303,6 +429,10 @@ class ChatUI {
                 console.error('Erreur serveur:', data.error);
                 this.addMessage(`Erreur: ${data.error}`, false);
             } else {
+                // Stocker les informations du modèle
+                if (data.model) {
+                    this.currentConversation.model = data.model;
+                }
                 this.addMessage(data.response || data.text || 'Aucune réponse reçue', false);
             }
         } catch (error) {
